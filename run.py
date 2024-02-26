@@ -34,6 +34,11 @@ out = df.with_columns(
 
 print(out)
 
+out = df.with_columns(
+        say_hello=language.say_hello("names")
+        )
+print(out)
+
 # Test we can extend the expressions by importing the extension module.
 
 import expression_lib.extension  # noqa: F401

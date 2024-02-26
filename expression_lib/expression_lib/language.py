@@ -16,6 +16,14 @@ def pig_latinnify(expr: IntoExpr, capitalize: bool = False) -> pl.Expr:
         kwargs={"capitalize": capitalize},
     )
 
+def say_hello(expr: IntoExpr, capitalize: bool = False):
+    expr = parse_into_expr(expr)
+    return expr.register_plugin(
+        lib=lib,
+        symbol="say_hello",
+        is_elementwise=True,
+        kwargs={"capitalize": capitalize},
+    )
 
 def append_args(
     expr: IntoExpr,

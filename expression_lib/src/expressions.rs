@@ -91,6 +91,14 @@ fn pig_latinnify_with_paralellism(
 }
 
 #[polars_expr(output_type=Float64)]
+fn say_hello(inputs: &[Series]) -> PolarsResult<Series> {
+    let input = &inputs[0];
+    println!("Hello from the rust side!");
+    let out = input.str().unwrap();
+    Ok(<polars::prelude::ChunkedArray<StringType> as Clone>::clone(&out).into_series())
+}
+
+#[polars_expr(output_type=Float64)]
 fn jaccard_similarity(inputs: &[Series]) -> PolarsResult<Series> {
     let a = inputs[0].list()?;
     let b = inputs[1].list()?;
